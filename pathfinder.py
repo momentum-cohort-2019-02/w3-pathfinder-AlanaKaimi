@@ -12,9 +12,9 @@ A program for Using object-oriented programming and testing to read elevation da
     # Step 5: Find and draw the lowest-elevation-change route in the map
 
 # import os ?
-from PIL import Image
+# from PIL import Image
 
-ELEVATION_FILENAME = 'elevation_small.txt'
+# ELEVATION_FILENAME = 'elevation_small.txt'
 
 class MapData:
     """
@@ -23,17 +23,29 @@ class MapData:
     - Sorts data to find highest and lowest elevations
     -   
     """
-    filename = ELEVATION_FILENAME
+    # filename = ELEVATION_FILENAME
 
-    with open(filename) as file:
-        elevation_data = [line.strip() for line in file]
-    pass
+    def elevations(self, filename):
+
+        self.elevation_data = []
+        with open(filename) as file:
+            for line in file:
+                self.elevation_data.append([int(e) for e in line.strip().split(" ")])
+            return self
+
+        print(self)
+
+MapData()
+
 
 class MapDrawer:
     """
     - takes info from MapData and assigns colors to elevations
     - Makes Image 'map.png'
     """
+
+###* Changing Individual Pixels (in Automate python article)
+    xxx.save("map.png", "PNG")
     pass
 
 class Pathfinder:
@@ -44,5 +56,13 @@ class Pathfinder:
     - Draws a path across the map
     - Makes Image 'path.png'
     """
+    
+###* Drawing path(line) on map (Drawing on Images in Automate Python)
+    xxx.save("path.png", "PNG")
+    pass
+
+if __name__ == "__main__":
+    
+    
     
     pass
