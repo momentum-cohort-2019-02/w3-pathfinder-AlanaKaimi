@@ -12,7 +12,7 @@ A program for Using object-oriented programming and testing to read elevation da
     # Step 5: Find and draw the lowest-elevation-change route in the map
 
 # import os ?
-# from PIL import Image
+# from PIL import Image, ImageDraw, ImageColor
 
 # ELEVATION_FILENAME = 'elevation_small.txt'
 
@@ -25,44 +25,63 @@ class MapData:
     """
     # filename = ELEVATION_FILENAME
 
-    def elevations(self, filename):
+    def __init__(self, filename):
+        self.elevations = [ ]
 
-        self.elevation_data = []
         with open(filename) as file:
             for line in file:
-                self.elevation_data.append([int(e) for e in line.strip().split(" ")])
-            return self
+                self.elevations.append([int(e) for e in line.split()])
+        
+        self.max_elevation = max([max(row) for row in self.elevations])
+        self.min_elevation = min([min(row) for row in self.elevations])
 
-        print(self)
+###! Printing to see remove later --->
+        # print(self.elevations) <-- prints HUGE list
+        print(self.max_elevation)
+        print(self.min_elevation)
+###! <--- remove
+    def get_elevation(self, x, y):
+        return self.elevations[y][x]
 
-MapData()
+    def get_intensity(self, x, y):
+        # return self.get_elevation(x, y) / self.max_elevation * 255
+        return int((self.get_elevation(x, y) - self.min_elevation) / (self.max_elevation - self.min_elevation) * 255)   
 
 
-class MapDrawer:
+class MapMaker:
     """
     - takes info from MapData and assigns colors to elevations
     - Makes Image 'map.png'
     """
-
-###* Changing Individual Pixels (in Automate python article)
-    xxx.save("map.png", "PNG")
+    def __init__(self, map):
+        self.map = map
+        self.image_map = Image.new('RGBA', (600, 600))
+    
+    
+    def make_map(self):
+    
     pass
+###* Changing Individual Pixels (in Automate python article)
+    # image_map.save('map.png')
+
 
 class Pathfinder:
     """ 
-    - Takes Map
+    - Takes info from MapData
     - Gives starting position
     - Equation to find path
     - Draws a path across the map
     - Makes Image 'path.png'
     """
-    
-###* Drawing path(line) on map (Drawing on Images in Automate Python)
-    xxx.save("path.png", "PNG")
     pass
+###* Drawing path(line) on map (Drawing on Images in Automate Python)
+    # xxx.save("path.png", "PNG")
+    
 
 if __name__ == "__main__":
     
+    filename = ('elevation_small.txt')
+
+MapData(filename)
     
-    
-    pass
+    # pass
