@@ -8,6 +8,7 @@ A program for Using object-oriented programming and testing to read elevation da
 
 import os 
 from PIL import Image, ImageDraw, ImageColor
+from pprint import pprint
 
 class MapData:
     """
@@ -57,32 +58,54 @@ class MapMaker:
         self.image_map.save('map.png')
 
 
-
-# class Pathfinder:
-#     """ 
-#     - Takes info from MapData
-#     - Gives starting position
-#     - Equation to find path
-#     - Draws a path across the map
-#     - Makes Image 'path.png'
-#     """
-#     def __init__(self, map):
-
-
-
-
-
-#     def plot_path():
-# ###* Reference pathfinder_janky.py https://github.com/momentum-cohort-2019-02/kb/blob/master/w3/examples/pathfinder_jank.py
+### TODO: --->
+class Pathfinder:
+    """ 
+    - Takes info from MapData
+    - Gives starting position
+    - Equation to find path
+    - Draws a path across the map
+    - Makes Image 'path.png'
+    """
+    def __init__(self, map):
+        self.map = map
+        
 
 
 
-#     def draw_path():
-# ###* Drawing path(line) on map (Drawing on Images in Automate Python)
+    def plot_path():
+###* Reference pathfinder_janky.py https://github.com/momentum-cohort-2019-02/kb/blob/master/w3/examples/pathfinder_jank.py
+        while cur_x < len(elevations[0]) - 1:
+    print("---")
+    possible_ys = [cur_y]
+    if cur_y - 1 >= 0:
+        possible_ys.append(cur_y - 1)
+    if cur_y + 1 < len(elevations):
+        possible_ys.append(cur_y + 1)
+
+    diffs = [
+        abs(elevations[poss_y][cur_x + 1] - elevations[cur_y][cur_x])
+        for poss_y in possible_ys
+    ]
+
+    min_diff = min(diffs)
+    min_diff_index = diffs.index(min_diff)
+    next_y = possible_ys[min_diff_index]
+
+    cur_x += 1
+    cur_y = next_y
+
+
+    def draw_path(self, xy, fill, width):
+###* Drawing path(line) on map (Drawing on Images in Automate Python)
+        im_path = Image.new('RGBA' (600, 600) 'teal')
+        draw = ImageDraw.Draw(im_path)
+
+        draw.line([(0, 0), (599, 599), (0, 599), (0, 0)], fill='teal')
 
 
 
-    # xxx.save("path.png", "PNG")
+        xxx.save("path.png", "PNG")
     
 
 if __name__ == "__main__":
