@@ -3,18 +3,11 @@ A program for Using object-oriented programming and testing to read elevation da
 """
 ###* DONE: Read data from elevation_small.txt
 ###* DONE: Get data into appropriate list 
-### TODO: Create elevation map (.png)
+###* DONE: Create elevation map (.png)
 ### TODO: Draw a path across it
-    # Step 1: Read the data into a 2D array
-    # Step 2: Find min, max elevations, and other calculations on the data  
-    # Step 3: Draw the map
-    # Step 4: Draw a lowest-elevation-change route starting from some row 
-    # Step 5: Find and draw the lowest-elevation-change route in the map
 
 import os 
 from PIL import Image, ImageDraw, ImageColor
-
-# ELEVATION_FILENAME = 'elevation_small.txt'
 
 class MapData:
     """
@@ -23,7 +16,6 @@ class MapData:
     - Sorts data to find highest and lowest elevations
     -   
     """
-    # filename = ELEVATION_FILENAME
 
     def __init__(self, filename):
         self.elevations = [ ]
@@ -46,10 +38,7 @@ class MapData:
     def get_intensity(self, x, y):
     
         return int((self.get_elevation(x, y) - self.min_elevation) / (self.max_elevation - self.min_elevation) * 255)   
-###* <--- Should be good
 
-
-### TODO: Working Here: ---->
 class MapMaker:
     """
     - takes info from MapData and assigns colors to elevations
@@ -57,18 +46,17 @@ class MapMaker:
     """
     def __init__(self, map):
         self.map = map
-        self.image_map = Image.new('RGBA', (600, 600))
+        self.image_map = Image.new('RGBA', (len(self.map.elevations[0]), len(self.map.elevations)))
     
     
     def make_map(self):
 ###* Reference: Changing Individual Pixels (in Automate python article)       
-        for x in range(600[0]):
-            for y in range(600):
+        for x in range(len(self.map.elevations[0])):
+            for y in range(len(self.map.elevations)):
                 self.image_map.putpixel((x, y), (self.map.get_intensity(x, y), self.map.get_intensity(x, y), self.map.get_intensity(x, y)))
         self.image_map.save('map.png')
 
-### TODO: Working Here: ^^^^^
-###? Testing but: TypeError: 'int' object is not subscriptable
+
 
 # class Pathfinder:
 #     """ 
@@ -102,5 +90,3 @@ if __name__ == "__main__":
     map_info = MapData('elevation_small.txt')
     draw_map = MapMaker(map_info)
     draw_map.make_map()
-
-# MapData(filename)
