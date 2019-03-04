@@ -5,10 +5,10 @@ A program for Using object-oriented programming and testing to read elevation da
 ###* DONE: Get data into appropriate list 
 ###* DONE: Create elevation map (.png)
 ### TODO: Draw a path across it
-
+import pprint
 import os 
 from PIL import Image, ImageDraw, ImageColor
-from pprint import pprint
+
 
 class MapData:
     """
@@ -20,6 +20,7 @@ class MapData:
 
     def __init__(self, filename):
         self.elevations = [ ]
+        filename = 'elevation_small.txt'
 
         with open(filename) as file:
             for line in file:
@@ -33,6 +34,7 @@ class MapData:
         print(self.max_elevation)
         print(self.min_elevation)
 ###! <--- remove
+
     def get_elevation(self, x, y):
         return self.elevations[y][x]
 
@@ -59,53 +61,80 @@ class MapMaker:
 
 
 ### TODO: --->
-class Pathfinder:
-    """ 
-    - Takes info from MapData
-    - Gives starting position
-    - Equation to find path
-    - Draws a path across the map
-    - Makes Image 'path.png'
-    """
-    def __init__(self, map):
-        self.map = map
+
+
+# class Pathfinder:
+#     """ 
+#     - Takes info from MapData
+#     - Gives starting position
+#     - Equation to find path
+#     - Draws a path across the map
+#     - Makes Image 'path.png'
+#     """
+#     def __init__(self, map):
+#         self.map = map
         
 
 
 
-    def plot_path():
-###* Reference pathfinder_janky.py https://github.com/momentum-cohort-2019-02/kb/blob/master/w3/examples/pathfinder_jank.py
-        while cur_x < len(elevations[0]) - 1:
-    print("---")
-    possible_ys = [cur_y]
-    if cur_y - 1 >= 0:
-        possible_ys.append(cur_y - 1)
-    if cur_y + 1 < len(elevations):
-        possible_ys.append(cur_y + 1)
+#     def plot_path(self):
 
-    diffs = [
-        abs(elevations[poss_y][cur_x + 1] - elevations[cur_y][cur_x])
-        for poss_y in possible_ys
-    ]
+# ###* Reference pathfinder_janky.py https://github.com/momentum-cohort-2019-02/kb/blob/master/w3/examples/pathfinder_jank.py
+        
+#         # elevations = [self.map.elevations]
+#         elevations = [
+#             [100, 105, 97, 101, 87],
+#             [90, 105, 99, 102, 86],
+#             [105, 98, 110, 103, 85],
+#             [78, 102, 87, 104, 84],
+#             [100, 103, 88, 105, 83],
+#         ]
 
-    min_diff = min(diffs)
-    min_diff_index = diffs.index(min_diff)
-    next_y = possible_ys[min_diff_index]
+#         pprint(elevations)
+#         print("cur_x", cur_x)
+#         print("cur_y", cur_y)
 
-    cur_x += 1
-    cur_y = next_y
+#     # Where we're currently starting from on the map:
+#         cur_x = 0
+#         cur_y = 2 # Could be any number between 0-600
+
+#     # while loop: Calculates the poosible next moves forward
+#         while cur_x < len(elevations[0]) - 1:
+#             print("---")
+#             possible_ys = [cur_y]
+#             if cur_y - 1 >= 0:
+#                 possible_ys.append(cur_y - 1)
+#             if cur_y + 1 < len(elevations):
+#                 possible_ys.append(cur_y + 1)
+
+#         # Calculates the difference between the elevation of the current location and the possible next location
+#             diffs = [abs(elevations[poss_y][cur_x + 1] - elevations[cur_y][cur_x])
+#                 for poss_y in possible_ys]
+            
+
+#             min_diff = min(diffs)
+#             min_diff_index = diffs.index(min_diff)
+#             next_y = possible_ys[min_diff_index]
+
+#             cur_x += 1
+#             cur_y = next_y
+
+#             print("cur_x", cur_x)
+#             print("cur_y", cur_y)
 
 
-    def draw_path(self, xy, fill, width):
-###* Drawing path(line) on map (Drawing on Images in Automate Python)
-        im_path = Image.new('RGBA' (600, 600) 'teal')
-        draw = ImageDraw.Draw(im_path)
+#     def draw_path(self, xy, fill, width):
+# ###* Drawing path(line) on map (Drawing on Images in Automate Python)
+#         self.image_path = Image.open('map.png')
+#         self.draw = ImageDraw.Draw(image_path)
 
-        draw.line([(0, 0), (599, 599), (0, 599), (0, 0)], fill='teal')
+#         # draw.line([(0, 0), (599, 599), (0, 599), (0, 0)], fill='teal')
+#         for i in range():
+#             draw.line([], fill='teal')
 
 
 
-        xxx.save("path.png", "PNG")
+#             image_path.save("path.png", "PNG")
     
 
 if __name__ == "__main__":

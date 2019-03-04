@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pillow = "*"
 pytest = "*"
+pillow = "*"
 
 [dev-packages]
 "flake8" = "*"
