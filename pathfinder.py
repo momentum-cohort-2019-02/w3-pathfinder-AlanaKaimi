@@ -74,7 +74,7 @@ class Pathfinder:
     """
     def __init__(self, map):
         self.map = map
-        self.Something = Something # Something should go here I think, but I'm not sure what yet...
+        self.Something = Something # <--- Something should go here I think, but I'm not sure what yet...
         
 
 
@@ -84,7 +84,7 @@ class Pathfinder:
 ###* Reference pathfinder_janky.py https://github.com/momentum-cohort-2019-02/kb/blob/master/w3/examples/pathfinder_jank.py
         
         # elevations = [self.map.elevations]
-        elevations = [
+        elevations = [# <--- temporary, for testing it out. Erase later and default to code above
             [100, 105, 97, 101, 87],
             [90, 105, 99, 102, 86],
             [105, 98, 110, 103, 85],
@@ -98,14 +98,17 @@ class Pathfinder:
 
     # Where we're currently starting from on the map, starting position:
         cur_x = 0
-        cur_y = 2 # Could be any number between 0-len(elevations)
+        cur_y = 2 # Could be any number between 0-len(elevations). (midway would be 300, bottom would be 600)
 
     # while loop: Calculates the poosible next moves forward
         while cur_x < len(elevations[0]) - 1:
             print("---")
+        # Evaluate going forward first:
             possible_ys = [cur_y]
+        # Evaluates going above
             if cur_y - 1 >= 0:
                 possible_ys.append(cur_y - 1)
+        # Evaluates going below
             if cur_y + 1 < len(elevations):
                 possible_ys.append(cur_y + 1)
 
